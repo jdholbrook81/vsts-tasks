@@ -85,6 +85,18 @@ async function run() {
             }
         }
 
+        let destinations: string[];
+        let platform: string = tl.getInput('platform', false);
+        if (platform === 'iOS' || platform === 'tvOS') {
+            let simulators = tl.getInput(`${platform}Simulators`, false);
+            let devices = tl.getInput(`${platform}Devices`, false);
+
+            destinations = utils.buildDestinationArgs(platform, simulators, devices);
+        }
+        else if (platform === 'macOS') {
+            destinations = ['platform=macOS'];
+        }
+
         let sdk: string = tl.getInput('sdk', false);
         let configuration: string = tl.getInput('configuration', false);
         let useXcpretty: boolean = tl.getBoolInput('useXcpretty', false);
@@ -125,6 +137,12 @@ async function run() {
             xcb.arg(ws);
         }
         xcb.argIf(scheme, ['-scheme', scheme]);
+        // Add a -destination argument for each device and simulator.
+        if (destinations) {
+            destinations.forEach(destination => {
+                xcb.arg(['-destination', destination]);
+            });
+        }
         xcb.arg(actions);
         if (actions.toString().indexOf('archive') < 0) {
             // redirect build output if archive action is not passed

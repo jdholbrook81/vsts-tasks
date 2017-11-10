@@ -46,6 +46,64 @@ export function findDeveloperDir(xcodeVersion: string): string {
     return discoveredDeveloperDir;
 }
 
+export function buildDestinationArgs(platform: string, simulators: string, devices: string): string[] {
+    let destinations: string[] = [];
+
+    function processArgs(args: string[], simulatorArgs: boolean) {
+        args.forEach(arg => {
+            arg = arg.trim();
+
+            let destination;
+            if (arg) {
+                if (simulatorArgs) {
+                    destination = `platform=${platform} Simulator`;
+                }
+                else {
+                    destination = `platform=${platform}`;
+                }
+
+                let matches = arg.match(/([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})/);
+                if (matches) {
+                    destination += `,id=${matches[0]}`;
+                }
+                else {
+                    let nameAdded = false;
+
+                    // First check for both name and OS version number being supplied.
+                    // Examples: "iPhone 6s (9.3)" or "iPhone X (latest)"
+                    matches = arg.match(/(.*)\(([0-9.]+|latest)\)/);
+                    if (matches) {
+                        if (!simulatorArgs) {
+                            tl.warning(tl.loc('OSSpecifierNotSupported'));
+                        }
+                        destination += `,name=${matches[1].trim()}`;
+                        destination += `,OS=${matches[2]}`;
+                        nameAdded = true;
+                    }
+                    else {
+                        destination += `,name=${arg}`;
+                    }
+                }
+            }
+
+            if (destination) {
+                tl.debug(`Destination: ${destination}`);
+                destinations.push(destination);
+            }
+        });
+    }
+
+    if (simulators) {
+        processArgs(simulators.split(','), true);
+    }
+
+    if (devices) {
+        processArgs(devices.split(','), false);
+    }
+
+    return destinations;
+}
+
 /**
  * Queries the schemes in a workspace.
  * @param xcbuild xcodebuild path

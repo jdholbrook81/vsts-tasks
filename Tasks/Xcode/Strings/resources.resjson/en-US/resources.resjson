@@ -5,6 +5,7 @@
   "loc.instanceNameFormat": "Xcode $(actions)",
   "loc.group.displayName.sign": "Signing & provisioning",
   "loc.group.displayName.package": "Package options",
+  "loc.group.displayName.devices": "Devices & simulators",
   "loc.group.displayName.advanced": "Advanced",
   "loc.input.label.actions": "Actions",
   "loc.input.help.actions": "Enter a space-delimited list of actions. Valid options are `build`, `clean`, `test`, `analyze`, and `archive`. For example,`clean build` will run a clean build. See the [xcodebuild man page](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html).",
@@ -44,6 +45,12 @@
   "loc.input.help.provProfileUuid": "(Optional) Enter the UUID of an installed provisioning profile to be used for this build. Use separate build tasks with different schemes or targets to specify separate provisioning profiles by target in a single workspace (iOS, tvOS, watchOS).",
   "loc.input.label.teamId": "Team ID",
   "loc.input.help.teamId": "(Optional, unless you are a member of multiple development teams.) Specify the 10-character development team ID.",
+  "loc.input.label.platform": "Destination platform",
+  "loc.input.help.platform": "Select the destination device's platform. If you need an option not listed below, use `Arguments` to pass the -destination argument.",
+  "loc.input.label.iOSSimulators": "iOS simulators",
+  "loc.input.label.iOSDevices": "iOS devices",
+  "loc.input.label.tvOSSimulators": "tvOS simulators",
+  "loc.input.label.tvOSDevices": "tvOS devices",
   "loc.input.label.args": "Arguments",
   "loc.input.help.args": "(Optional) Enter additional command line arguments with which to build. This is useful for specifying `-target` or `-project` arguments instead of specifying a workspace/project and scheme. See the [xcodebuild man page](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html).",
   "loc.input.label.cwd": "Working directory",
@@ -76,5 +83,6 @@
   "loc.messages.MultipleSchemesFound": "The workspace contains multiple schemes. The scheme must be specified.",
   "loc.messages.NoSchemeFound": "No shared scheme found. Use \"Manage Schemes\" in Xcode to share a scheme.",
   "loc.messages.SchemeDetected": "The workspace contains a single scheme. '%s' will be used.",
-  "loc.messages.UnableToDetectScheme": "Unable to detect workspace scheme(s). The scheme must be specified."
+  "loc.messages.UnableToDetectScheme": "Unable to detect workspace scheme(s). The scheme must be specified.",
+  "loc.messages.OSSpecifierNotSupported": "The OS specifier is not supported for devices, only simulators. Remove the OS version number and supply only the device name or UUID."
 }

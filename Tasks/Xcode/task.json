@@ -12,7 +12,7 @@
     "version": {
         "Major": 4,
         "Minor": 126,
-        "Patch": 3
+        "Patch": 6
     },
     "demands": [
         "xcode"
@@ -27,6 +27,11 @@
         {
             "name": "package",
             "displayName": "Package options",
+            "isExpanded": true
+        },
+        {
+            "name": "devices",
+            "displayName": "Devices & simulators",
             "isExpanded": true
         },
         {
@@ -226,6 +231,57 @@
             "visibleRule": "signStyle = auto"
         },
         {
+            "name": "platform",
+            "type": "picklist",
+            "label": "Destination platform",
+            "defaultValue": "default",
+            "required": false,
+            "helpMarkDown": "Select the destination device's platform. If you need an option not listed below, use `Arguments` to pass the -destination argument.",
+            "groupName": "devices",
+            "options": {
+                "default": "default",
+                "iOS": "iOS and watchOS",
+                "tvOS": "tvOS",
+                "macOS": "macOS"
+            }
+        },
+        {
+            "name": "iOSSimulators",
+            "label": "iOS simulators",
+            "type": "string",
+            "defaultValue": "iPhone 6s, iPhone X",
+            "required": false,
+            "groupName": "devices",
+            "visibleRule": "platform == iOS"
+        },
+        {
+            "name": "iOSDevices",
+            "label": "iOS devices",
+            "type": "string",
+            "defaultValue": "",
+            "required": false,
+            "groupName": "devices",
+            "visibleRule": "platform == iOS"
+        },
+        {
+            "name": "tvOSSimulators",
+            "label": "tvOS simulators",
+            "type": "string",
+            "defaultValue": "Apple TV, Apple TV 4K",
+            "required": false,
+            "groupName": "devices",
+            "visibleRule": "platform == tvOS"
+        },
+        {
+            "name": "tvOSDevices",
+            "label": "tvOS devices",
+            "type": "string",
+            "defaultValue": "",
+            "required": false,
+            "groupName": "devices",
+            "visibleRule": "platform == tvOS"
+        },
+        {
             "name": "args",
             "type": "string",
             "label": "Arguments",
@@ -305,6 +361,7 @@
         "MultipleSchemesFound": "The workspace contains multiple schemes. The scheme must be specified.",
         "NoSchemeFound": "No shared scheme found. Use \"Manage Schemes\" in Xcode to share a scheme.",
         "SchemeDetected": "The workspace contains a single scheme. '%s' will be used.",
-        "UnableToDetectScheme": "Unable to detect workspace scheme(s). The scheme must be specified."
+        "UnableToDetectScheme": "Unable to detect workspace scheme(s). The scheme must be specified.",
+        "OSSpecifierNotSupported": "The OS specifier is not supported for devices, only simulators. Remove the OS version number and supply only the device name or UUID."
     }
 }

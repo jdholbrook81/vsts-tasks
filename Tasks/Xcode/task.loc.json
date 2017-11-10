@@ -12,7 +12,7 @@
   "version": {
     "Major": 4,
     "Minor": 126,
-    "Patch": 3
+    "Patch": 6
   },
   "demands": [
     "xcode"
@@ -27,6 +27,11 @@
     {
       "name": "package",
       "displayName": "ms-resource:loc.group.displayName.package",
+      "isExpanded": true
+    },
+    {
+      "name": "devices",
+      "displayName": "ms-resource:loc.group.displayName.devices",
       "isExpanded": true
     },
     {
@@ -226,6 +231,57 @@
       "visibleRule": "signStyle = auto"
     },
     {
+      "name": "platform",
+      "type": "picklist",
+      "label": "ms-resource:loc.input.label.platform",
+      "defaultValue": "default",
+      "required": false,
+      "helpMarkDown": "ms-resource:loc.input.help.platform",
+      "groupName": "devices",
+      "options": {
+        "default": "default",
+        "iOS": "iOS and watchOS",
+        "tvOS": "tvOS",
+        "macOS": "macOS"
+      }
+    },
+    {
+      "name": "iOSSimulators",
+      "label": "ms-resource:loc.input.label.iOSSimulators",
+      "type": "string",
+      "defaultValue": "iPhone 6s, iPhone X",
+      "required": false,
+      "groupName": "devices",
+      "visibleRule": "platform == iOS"
+    },
+    {
+      "name": "iOSDevices",
+      "label": "ms-resource:loc.input.label.iOSDevices",
+      "type": "string",
+      "defaultValue": "",
+      "required": false,
+      "groupName": "devices",
+      "visibleRule": "platform == iOS"
+    },
+    {
+      "name": "tvOSSimulators",
+      "label": "ms-resource:loc.input.label.tvOSSimulators",
+      "type": "string",
+      "defaultValue": "Apple TV, Apple TV 4K",
+      "required": false,
+      "groupName": "devices",
+      "visibleRule": "platform == tvOS"
+    },
+    {
+      "name": "tvOSDevices",
+      "label": "ms-resource:loc.input.label.tvOSDevices",
+      "type": "string",
+      "defaultValue": "",
+      "required": false,
+      "groupName": "devices",
+      "visibleRule": "platform == tvOS"
+    },
+    {
       "name": "args",
       "type": "string",
       "label": "ms-resource:loc.input.label.args",
@@ -305,6 +361,7 @@
     "MultipleSchemesFound": "ms-resource:loc.messages.MultipleSchemesFound",
     "NoSchemeFound": "ms-resource:loc.messages.NoSchemeFound",
     "SchemeDetected": "ms-resource:loc.messages.SchemeDetected",
-    "UnableToDetectScheme": "ms-resource:loc.messages.UnableToDetectScheme"
+    "UnableToDetectScheme": "ms-resource:loc.messages.UnableToDetectScheme",
+    "OSSpecifierNotSupported": "ms-resource:loc.messages.OSSpecifierNotSupported"
   }
 }
